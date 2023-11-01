@@ -1,0 +1,89 @@
+﻿@using Web_Marina_DB.Models
+@model List<Boot>
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <link href="~/css/indexstyle.css" rel="stylesheet" />
+    <title>Index</title>
+</head>
+
+<body>
+    <div class="Hauptcontainer">
+        <h1>Yachthafen</h1>
+
+        @if (ViewBag.Fehler != null)
+        {
+            <h3>Fehler:</h3>
+            <p class="Verbindungsfehler">@ViewBag.Fehler</p>
+        }
+        else
+        {
+            <div class="Containerkopf">
+                <div>Übersicht Boote</div>
+                <div>
+                    <a href="/home/admin">admin</a>
+                </div>
+            </div>
+
+            <div class="Container overflow">
+                <table class="Tabelle">
+                    <thead>
+                        <tr>
+                            <th>BID</th>
+                            <th>Name</th>
+                            <th>Länge in m</th>
+                            <th>IstSegler</th>
+                            <th>Tiefgang in m</th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            foreach (var boot in Model)
+                            {
+                                <tr>
+                                    <td id="BID">@boot.BID</td>
+                                    <td id="Name">@boot.Name</td>
+                                    <td id="Laenge">@boot.Laenge.ToString("0.00")</td>
+                                    
+                                    @if (boot.IstSegler)
+                                    {
+                                        <td class="Segler"><i class="bi-check-circle"></i></td>
+                                    }
+                                    else
+                                    {
+                                        <td class="Segler"><i class="bi-dash-circle"></i></td>
+                                    }
+
+                                    <td id="Tiefgang">@boot.Tiefgang.ToString("0.00")</td>
+                                    <td>
+                                        <a href="#img@(boot.BID)"><img class="img-link" src="/images/@(boot.Bildname==null?"DefaultBoot.jpg":boot.Bildname)" title="@(boot.Name+Html.Raw(System.Web.HttpUtility.HtmlDecode("&#010;")))Zum Vergrößern klicken" /></a>
+
+                                        <a href="#" class="lightbox" id="img@(boot.BID)">
+                                            <img src="/images/@(boot.Bildname==null?"DefaultBoot.jpg":boot.Bildname)" />
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="/home/details?id=@boot.BID" title="@boot.Name anzeigen"><i class="bi-search-heart BearbeitungsIcon"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+
+    <script src="~/js/site.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,102 @@
+﻿@using Web_Marina_DB.ViewModels
+@model InsertViewModel
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/insertstyle.css" rel="stylesheet" />
+    <title>Insert</title>
+</head>
+
+<body>
+    <div class="Hauptcontainer">
+        <h1>Neues Boot zur Datenbank hinzufügen</h1>
+
+        <div class="Containerkopf">
+            <div>Neues Boot</div>
+            <div><a href="/home/admin">zurück</a></div>
+        </div>
+
+        <div class="Container">
+            <div class="Schiffsdaten">
+                <form action="/home/insert" method="post" enctype="multipart/form-data">
+                    <label asp-for="Name"></label>
+                    @* wenn die Validierung fehlschlägt, dann wird die Fehlermeldung angezeigt und
+                    es soll ein <br /> eingefügt werden, damit die Fehlermeldung unter dem Label angezeigt wird *@
+
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <br />
+                    }
+
+                    <span asp-validation-for="Name"></span><br />
+                    <input asp-for="Name" id="Name" />
+                    <br />
+
+                    <label asp-for="Laenge">Länge in Metern</label>
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <br />
+                    }
+                    <span asp-validation-for="Laenge"></span><br />
+                    <input asp-for="Laenge" class="TextFieldZahlen" />
+                    <br />
+
+                    <label asp-for="Motorleistung">Motorleistung in PS</label>
+                    <br />
+                    <input asp-for="Motorleistung" type="text" class="TextFieldZahlen" />
+                    <br />
+
+                    @* Checkbox/ Radio-Buttons für IstSegler *@
+
+                    <fieldset>
+                        <legend>Ist Segler</legend>
+                        <label asp-for="Segler" for="ja">ja</label>
+                        <input asp-for="Segler" type="radio" value="ja" id="ja" checked />
+                        <br />
+                        <label asp-for="Segler" for="nein">nein</label>
+                        <input asp-for="Segler" type="radio" value="nein" id="nein" />
+                        <br />
+                    </fieldset>
+                    <br />
+
+                    <label asp-for="Tiefgang">Tiefgang in Metern</label>
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <br />
+                    }
+                    <span asp-validation-for="Tiefgang"></span><br />
+                    <input asp-for="Tiefgang" class="TextFieldZahlen" />
+                    <br />
+
+                    <label asp-for="Baujahr">Baujahr</label>
+                    <br />
+                    <input asp-for="Baujahr" type="text" class="TextFieldZahlen" />
+                    <br /> <br />
+
+
+                    <label asp-for="neuesBild">Bild auswählen und hochladen</label> <br />
+                    <input asp-for="neuesBild" type="file" class="dateiAuswählen Button" onchange="document.getElementById('Vorschau').src = window.URL.createObjectURL(this.files[0]); document.getElementById('Btn_Verwerfen').style.visibility='visible'" />
+                    <button style="visibility:hidden" id="Btn_Verwerfen" class="Button" type="button" onclick="LogikBtnVerwerfen()">Bild verwerfen</button>
+                    <br /> <br />
+
+                    <button class="Button" type="submit">Speichern</button>
+                    <button class="Button" type="reset" onclick="LogikBtnVerwerfen()">Reset</button>
+                    <br /> <br />
+                </form>
+            </div>
+
+            <div class="image">
+                <img id="Vorschau" />
+            </div>
+
+        </div>
+    </div>
+    <script src="~/js/site.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,163 @@
+﻿html {
+    height: 100%;
+    background-image: url(/images/BackgroundImage.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.8rem;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.Hauptcontainer {
+    max-width: 60em;
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: .4em;
+    padding: 1em;
+    margin-top: 3em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.Containerkopf {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 2rem;
+    margin-right: 2rem;
+    margin-left: 2rem;
+    font-weight: 600;
+    gap: 1rem;
+}
+
+.Container {
+    background-color: #e6ffff;
+    border-radius: .4em;
+    padding: .5em;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.overflow {
+    overflow-x: scroll;
+}
+
+th {
+    text-align: center;
+}
+
+tbody > tr:hover {
+    background-color: #cff7f3;
+}
+
+tr:nth-child(even) {
+    background-color: #fffaf0;
+}
+
+#BID {
+    text-align: right;
+    padding-right: 1.4em;
+}
+
+#Name {
+    text-align: center;
+    padding-left: 1.1em;
+    padding-right: 1em;
+}
+
+#Laenge {
+    text-align: center;
+}
+
+.Segler {
+    text-align: center;
+    color: deeppink;
+}
+
+#Tiefgang {
+    text-align: center;
+}
+
+.img-link {
+    width: 3em;
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
+    border-radius: .1em;
+}
+
+.BearbeitungsIcon {
+    font-size: 1.5rem;
+    color: #000000;
+}
+
+    .BearbeitungsIcon:hover {
+        color: deeppink;
+    }
+
+a:link {
+    color: black;
+}
+
+a:visited {
+    color: black;
+}
+
+a:hover {
+    color: deeppink;
+}
+
+a:active {
+    color: deeppink;
+    text-decoration: none;
+}
+
+.AdminIcons {
+    text-align: center;
+    margin-left: 1em;
+    padding-right: 1em;
+}
+
+/* https://codesalad.dev/blog/pop-up-image-lightbox-in-pure-css-25 */
+.lightbox {
+    /* standardmäßig ausgeblendet */
+    display: none;
+    /* gesamten Bildschirm überlagern */
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* Padding */
+    padding: 5em;
+    /* durchscheinender Hintergrund */
+    background: rgba(0, 0, 0, 0.7);
+}
+    /* Einblenden der Lightbox, wenn sie das Ziel ist */
+    .lightbox:target {
+        display: block;
+        animation: Einblenden 1s;
+    }
+
+    .lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        /*margin: auto;*/
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: .5em;
+    }

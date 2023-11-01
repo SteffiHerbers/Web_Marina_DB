@@ -1,0 +1,68 @@
+﻿@using Web_Marina_DB.Models
+@model Boot
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/detailsstyle.css" rel="stylesheet" />
+    <title>Details</title>
+</head>
+
+<body>
+    <div class="Hauptcontainer">
+        <h1>Detailansicht</h1>
+
+        <div class="Containerkopf">
+            <div>Details zu Boot "@Model.Name"</div>
+            <div><a href="javascript:history.back()">zurück zur Übersicht</a></div>
+        </div>
+
+        <div class="Container">
+            <div class="Schiffsdaten">
+                <ul>
+                    <li>
+                        <label>ID:</label>
+                        <label>@Model.BID</label> <br />
+                    </li>
+                    <li>
+                        <label>Länge:</label>
+                        <label>@Model.Laenge.ToString("0.00") m</label> <br />
+                    </li>
+                    <li>
+                        <label>Motorleistung:</label>
+                        <label>
+                            @(Model.Motorleistung == null ? "keine Angabe" : $"{Model.Motorleistung} PS")
+                        </label> <br />
+                    </li>
+                    <li>
+                        <label>Ist Segler:</label>
+                        <label>@(Model.IstSegler ? "ja" : "nein")</label> <br />
+                    </li>
+                    <li>
+                        <label>Tiefgang:</label>
+                        <label>@Model.Tiefgang.ToString("0.00") m</label> <br />
+                    </li>
+                    <li>
+                        <label>Baujahr:</label>
+                        <label>@(Model.Baujahr == null ? "keine Angabe" : $"{Model.Baujahr}")</label>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="image">
+                @if (Model.Bildname != null)
+                {
+                    <img id="aktuellesBild" src="~/images/@Model.Bildname" />
+                }
+                else
+                {
+                    <img id="aktuellesBild" src="~/images/DefaultBoot.jpg" />
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
