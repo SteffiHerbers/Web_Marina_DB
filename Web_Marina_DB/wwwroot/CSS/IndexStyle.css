@@ -101,6 +101,10 @@ tr:nth-child(even) {
     border-radius: .1em;
 }
 
+    .img-link:hover {
+        box-shadow: 0 4px 9px 0 rgba(0, 0, 0, 0.7);
+    }
+
 .BearbeitungsIcon {
     font-size: 1.5rem;
     color: #000000;

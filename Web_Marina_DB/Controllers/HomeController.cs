@@ -6,10 +6,7 @@ namespace Web_Marina_DB.Controllers
 {
     public class HomeController : Controller
     {
-        // Bitte bei Verwendung eines MS SQL-Servers einkommentieren und SQLiteDAL auskommentieren:
-        //readonly SqlServerDAL datenzugriff;  // => SQL Server!
-
-        readonly SQLiteDAL datenzugriff; // => SQLite!
+        readonly IDataAccessable datenzugriff; 
 
         readonly IWebHostEnvironment WebServerInfo;
 
@@ -19,8 +16,8 @@ namespace Web_Marina_DB.Controllers
         {
             //---------------------------------------------------------------------------------
             // Konfiguration für SQL Server
-            //string connectionString = configuration.GetConnectionString("DB-Verbindung"); 
-            //datenzugriff = new SqlServerDAL(connectionString); 
+            //string connectionString = configuration.GetConnectionString("DB-Verbindung");
+            //datenzugriff = new SqlServerDAL(connectionString);
             //---------------------------------------------------------------------------------
 
 
@@ -86,8 +83,8 @@ namespace Web_Marina_DB.Controllers
         [HttpPost]
         public async Task<IActionResult> Insert(InsertViewModel viewModel)
         {
-            // IFormFile "Bild" aus der Validierung nehmen, da es zu Fehlern kommen kann, wenn kein Bild ausgewählt + hochgeladen wird
-            ModelState.Remove("Bild");
+            // IFormFile "neuesBild" aus der Validierung nehmen, da es zu Fehlern kommen kann, wenn kein Bild ausgewählt + hochgeladen wird
+            ModelState.Remove("neuesBild");
 
             // Validierung durchführen:
             // Wenn die Validierung fehlschlägt, wird die View mit den Validierungsfehlern erneut angezeigt.
@@ -120,7 +117,6 @@ namespace Web_Marina_DB.Controllers
                 Name = viewModel.Name,
                 Laenge = viewModel.Laenge.Value,
                 Motorleistung = viewModel.Motorleistung.HasValue ? viewModel.Motorleistung.Value : null,
-                // prüfen, welcher Radiobutton ausgewählt wurde, ja oder nein:
                 IstSegler = viewModel.Segler == "ja" ? true : false,
                 Tiefgang = viewModel.Tiefgang.Value,
                 Baujahr = string.IsNullOrEmpty(viewModel.Baujahr) ? null : viewModel.Baujahr,

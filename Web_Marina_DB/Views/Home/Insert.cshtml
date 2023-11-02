@@ -25,7 +25,7 @@
             <div class="Schiffsdaten">
                 <form action="/home/insert" method="post" enctype="multipart/form-data">
                     <label asp-for="Name"></label>
-                    @* wenn die Validierung fehlschlägt, dann wird die Fehlermeldung angezeigt und
+                    @* wenn die Validierung fehlschlägt, wird die Fehlermeldung angezeigt und
                     es soll ein <br /> eingefügt werden, damit die Fehlermeldung unter dem Label angezeigt wird *@
 
                     @if (!ViewData.ModelState.IsValid)
