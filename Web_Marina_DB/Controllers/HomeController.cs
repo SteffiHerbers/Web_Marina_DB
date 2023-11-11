@@ -6,7 +6,7 @@ namespace Web_Marina_DB.Controllers
 {
     public class HomeController : Controller
     {
-        readonly IDataAccessable datenzugriff; 
+        readonly IDataAccessable datenzugriff;
 
         readonly IWebHostEnvironment WebServerInfo;
 
@@ -178,12 +178,7 @@ namespace Web_Marina_DB.Controllers
 
             if (bildname == null)
             {
-                if (viewModel.bildVerwenden == "aktuellesBild" || viewModel.bildVerwenden == "keinBild")
-                {
-                    bildname = null;
-                }
-                // Auswahl: neues Bild verwenden
-                else
+                if (viewModel.bildVerwenden == "neuesBild")
                 {
                     if (viewModel.neuesBild != null && viewModel.neuesBild.Length != 0 && viewModel.neuesBild.ContentType.Contains("image"))
                     {
@@ -199,26 +194,28 @@ namespace Web_Marina_DB.Controllers
                         bildname = null;
                     }
                 }
+                else
+                {
+                    bildname = null;
+                }
             }
+
             // Es gibt bereits ein Bild für das Boot, der Bildname ist nicht null
             else
             {
                 switch (viewModel.bildVerwenden)
                 {
-                    case "aktuellesBild":
-                        bildname = viewModel.Bildname;
-                        break;
                     case "keinBild":
                         // altes Bild aus dem Bilderordner löschen:
                         System.IO.File.Delete(bilderpfad + viewModel.Bildname);
+
                         bildname = null;
                         break;
                     case "neuesBild":
-                        // altes Bild aus dem Bilderordner löschen:
-                        System.IO.File.Delete(bilderpfad + viewModel.Bildname);
-
                         if (viewModel.neuesBild != null && viewModel.neuesBild.Length != 0 && viewModel.neuesBild.ContentType.Contains("image"))
                         {
+                            System.IO.File.Delete(bilderpfad + viewModel.Bildname);
+
                             bildname = Guid.NewGuid().ToString() + Path.GetExtension(viewModel.neuesBild.FileName);
 
                             using (var stream = System.IO.File.Create(bilderpfad + bildname))
@@ -228,11 +225,11 @@ namespace Web_Marina_DB.Controllers
                         }
                         else
                         {
-                            bildname = null;
+                            bildname = viewModel.Bildname;
                         }
                         break;
                     default:
-                        bildname = null;
+                        bildname = viewModel.Bildname;
                         break;
                 }
             }
